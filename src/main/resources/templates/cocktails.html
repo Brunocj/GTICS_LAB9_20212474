@@ -13,7 +13,7 @@
         <div th:each="cocktail : ${cocktails}">
             <!-- Comenzar una nueva columna para cada cóctel -->
             <div class="col">
-                <a th:href="'info?id=' + ${cocktail[2]}">
+                <a th:href="'info?id=' + ${cocktail[2]}" style="text-decoration: none;">
                     <div class="card h-100">
                         <img th:src="${cocktail[1]}" class="card-img-top" th:alt="${cocktail[0]}" >
                         <div class="card-body">
