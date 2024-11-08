@@ -21,4 +21,12 @@ public class LabController {
         model.addAttribute("cocktails", cocktails);
         return "cocktails";
     }
+
+    @GetMapping({"/info"})
+    public String showCocktails(Model model, String id) {
+        List<String>cocktail = this.apiController.info(id);
+        System.out.println(cocktail);
+        model.addAttribute("cocktail", cocktail);
+        return "cocktail";
+    }
 }
