@@ -16,7 +16,10 @@ import java.util.List;
 public class LabController {
     @Autowired
     ApiController apiController;
-    @Autowired FavMealRepository favMealRepository;
+
+    @Autowired
+    FavMealRepository favMealRepository;
+
     public LabController() {
     }
 
@@ -25,6 +28,14 @@ public class LabController {
         List<List<String>> categories = this.apiController.listar();
         model.addAttribute("categories", categories);
         return "categories";
+    }
+
+
+    @GetMapping({"/favsList"})
+    public String showFavs(Model model){
+        List<Favmeal> favMeals = favMealRepository.findAll();
+        model.addAttribute("FavMeals", favMeals);
+        return "myFavs";
     }
 
     @GetMapping({"/buscar"})
@@ -72,4 +83,5 @@ public class LabController {
 
         return "redirect:/info?id=" + favmeal.get(13);
     }
+
 }
