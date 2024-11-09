@@ -24,17 +24,25 @@ public class LabController {
         return "categories";
     }
 
-    /*@GetMapping({"/info"})
-    public String showCocktails(Model model, String id) {
-        List<String>cocktail = this.apiController.info(id);
-        System.out.println(cocktail);
-        model.addAttribute("cocktail", cocktail);
-        boolean isfav = favDrinkRepository.existsByIdDrink(id);
-        model.addAttribute("isFavourite", isfav);
+    @GetMapping({"/buscar"})
+    public String searchMeals(Model model, @RequestParam("query") String query) {
+        List<List<String>> meals = this.apiController.buscar(query);
+        model.addAttribute("meals", meals);
 
-        return "cocktail";
+        return "meals";
     }
-    @PostMapping({"/addFav"})
+
+    @GetMapping({"/info"})
+    public String showMeals(Model model, String id) {
+        List<String>meal = this.apiController.info(id);
+        System.out.println(meal);
+        model.addAttribute("meal", meal);
+        //boolean isfav = favDrinkRepository.existsByIdDrink(id);
+        //model.addAttribute("isFavourite", isfav);
+
+        return "meal";
+    }
+    /*@PostMapping({"/addFav"})
     public String addFav(@RequestParam List<String> favcock, RedirectAttributes redirectAttributes, Model model){
         Favdrink favdrink = new Favdrink();
         favdrink.setStrDrink(favcock.get(0));

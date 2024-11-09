@@ -28,16 +28,18 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div th:each="categorie : ${categories}">
+        <div th:each="meal : ${meals}">
             <!-- Comenzar una nueva columna para cada cóctel -->
             <div class="col">
-                <div class="card h-100">
-                    <img th:src="${categorie[1]}" class="card-img-top" th:alt="${categorie[0]}">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${categorie[0]}"></h5>
-                        <p class="card-text" th:text="${categorie[2]}"></p> <!-- Clase card-text para truncar descripción -->
+                <a th:href="'info?id=' + ${meal[3]}" style="text-decoration: none;">
+                    <div class="card h-100">
+                        <h5 class="card-title" th:text="${meal[0]}"></h5>
+                        <img th:src="${meal[1]}" class="card-img-top" th:alt="${meal[0]}">
+                        <div class="card-body">
+                            <p class="card-text" th:text="${meal[2]}"></p> <!-- Clase card-text para truncar descripción -->
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
