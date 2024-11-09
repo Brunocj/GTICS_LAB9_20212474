@@ -25,7 +25,7 @@
     <h1>TELEMEAL</h1>
     <form class="d-flex justify-content-center mb-4" action="/buscar" method="get">
         <input class="form-control me-2" type="search" name="query" placeholder="Search for a meal" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-primary" type="submit">Search</button>
     </form>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div th:each="categorie : ${categories}">
