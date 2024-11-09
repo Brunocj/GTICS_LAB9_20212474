@@ -9,7 +9,6 @@
             object-fit: cover;
         }
         .card-body {
-            height: 150px;
             overflow: hidden;
         }
         .card-text {
@@ -23,31 +22,24 @@
 </head>
 <body>
 <div class="container text-center my-5" style="width: 55vw;">
-    <div class="container d-flex justify-content-between align-items-center my-5">
-        <div class="mx-auto">
-            <h1 class="text-center m-0">TELEMEAL</h1>
-        </div>
-        <a href="/favsList" class="btn btn-success">List my favorites</a>
-    </div>
-
-
-
+    <h1>TELEMEAL</h1>
     <form class="d-flex justify-content-center mb-4" action="/buscar" method="get">
         <input class="form-control me-2" type="search" name="query" placeholder="Search for a meal" aria-label="Search">
         <button class="btn btn-primary" type="submit">Search</button>
-
     </form>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div th:each="categorie : ${categories}">
+        <div th:each="meal : ${FavMeals}">
             <!-- Comenzar una nueva columna para cada cóctel -->
             <div class="col">
-                <div class="card h-100">
-                    <img th:src="${categorie[1]}" class="card-img-top" th:alt="${categorie[0]}">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${categorie[0]}"></h5>
-                        <p class="card-text" th:text="${categorie[2]}"></p> <!-- Clase card-text para truncar descripción -->
+                <a th:href="'info?id=' + ${meal.getIdMeal()}" style="text-decoration: none;">
+                    <div class="card h-100">
+                        <h5 class="card-title" th:text="${meal.getStrMeal()}"></h5>
+                        <img th:src="${meal.getStrMealThumb()}" class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text" th:text="${meal.getStrCategory()}"></p> <!-- Clase card-text para truncar descripción -->
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
