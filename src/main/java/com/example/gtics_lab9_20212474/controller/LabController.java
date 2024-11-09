@@ -1,5 +1,7 @@
 package com.example.gtics_lab9_20212474.controller;
 
+import com.example.gtics_lab9_20212474.entity.Favmeal;
+import com.example.gtics_lab9_20212474.repository.FavMealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import java.util.List;
 public class LabController {
     @Autowired
     ApiController apiController;
+    @Autowired FavMealRepository favMealRepository;
     public LabController() {
     }
 
@@ -28,7 +31,6 @@ public class LabController {
     public String searchMeals(Model model, @RequestParam("query") String query) {
         List<List<String>> meals = this.apiController.buscar(query);
         model.addAttribute("meals", meals);
-
         return "meals";
     }
 
@@ -37,33 +39,37 @@ public class LabController {
         List<String>meal = this.apiController.info(id);
         System.out.println(meal);
         model.addAttribute("meal", meal);
-        //boolean isfav = favDrinkRepository.existsByIdDrink(id);
-        //model.addAttribute("isFavourite", isfav);
+        boolean isfav = favMealRepository.existsByIdMeal(id);
+        model.addAttribute("isFavorite", isfav);
 
         return "meal";
     }
-    /*@PostMapping({"/addFav"})
-    public String addFav(@RequestParam List<String> favcock, RedirectAttributes redirectAttributes, Model model){
-        Favdrink favdrink = new Favdrink();
-        favdrink.setStrDrink(favcock.get(0));
-        favdrink.setStrDrinkThumb(favcock.get(1));
-        favdrink.setStrCategory(favcock.get(2));
-        favdrink.setStrAlcoholic(favcock.get(3));
-        favdrink.setStrGlass(favcock.get(4));
-        favdrink.setStrInstructions(favcock.get(5));
-        favdrink.setStrIngredient1(favcock.get(6));
-        favdrink.setStrMeasure1(favcock.get(7));
-        favdrink.setStrIngredient2(favcock.get(8));
-        favdrink.setStrMeasure2(favcock.get(9));
-        favdrink.setStrIngredient3(favcock.get(10));
-        favdrink.setStrMeasure3(favcock.get(11));
-        favdrink.setStrIngredient4(favcock.get(12));
-        favdrink.setIdDrink(favcock.get(13));
-        favDrinkRepository.save(favdrink);
+    @PostMapping({"/addFav"})
+    public String addFav(@RequestParam List<String> favmeal, RedirectAttributes redirectAttributes, Model model){
+        Favmeal comidafavorita = new Favmeal();
+        comidafavorita.setStrMeal(favmeal.get(0));
+        comidafavorita.setStrMealThumb(favmeal.get(1));
+        comidafavorita.setStrCategory(favmeal.get(2));
+        comidafavorita.setStrArea(favmeal.get(3));
+        comidafavorita.setStrTags(favmeal.get(4));
+        comidafavorita.setStrInstructions(favmeal.get(5));
+        comidafavorita.setStrIngredient1(favmeal.get(6));
+        comidafavorita.setStrMeasure1(favmeal.get(7));
+        comidafavorita.setStrIngredient2(favmeal.get(8));
+        comidafavorita.setStrMeasure2(favmeal.get(9));
+        comidafavorita.setStrIngredient3(favmeal.get(10));
+        comidafavorita.setStrMeasure3(favmeal.get(11));
+        comidafavorita.setStrIngredient4(favmeal.get(12));
+        comidafavorita.setIdMeal(favmeal.get(13));
+        System.out.println(favmeal.get(11));
+        System.out.println(favmeal.get(12));
+        System.out.println(favmeal.get(13));
+
+        favMealRepository.save(comidafavorita);
 
         redirectAttributes.addFlashAttribute("showModal", true);
-        model.addAttribute("isFavourite", true);
+        model.addAttribute("isFavorite", true);
 
-        return "redirect:/info?id=" + favcock.get(13);
-    }*/
+        return "redirect:/info?id=" + favmeal.get(13);
+    }
 }

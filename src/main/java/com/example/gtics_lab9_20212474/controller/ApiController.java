@@ -213,7 +213,7 @@ public class ApiController {
             info.add((String) drink.get("strIngredient3"));
             info.add((String) drink.get("strMeasure3"));
             info.add((String) drink.get("strIngredient4"));
-            info.add((String) drink.get("idDrink"));
+            info.add((String) drink.get("idMeal"));
             System.out.println("Info: " + info);
         } catch (ParseException e) {
             e.printStackTrace();
